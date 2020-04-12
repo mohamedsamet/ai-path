@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --poll 1000",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "docker-down": "docker-compose --project-name ai-path-dev -f env_dev.yml down -v --remove-orphans",
+    "docker-up": "docker-compose --project-name ai-path-dev -f env_dev.yml up --build -d",
+    "docker-run": "npm run docker-down && npm run docker-up",
+    "exec-cont": "docker exec -it ai-path-dev npm start",
+    "go": "npm run docker-run && npm run exec-cont"
   },
   "private": true,
   "dependencies": {

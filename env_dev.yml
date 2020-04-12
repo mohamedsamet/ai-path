@@ -1,0 +1,16 @@
+version: '2'
+services:
+  web:
+    container_name: ai-path-dev
+    image: ai-path:latest
+    build: .
+    restart: always
+    ports:
+      - 8180:8180
+      - 8181:8181
+      - 8182:8182
+      - 8183:8183
+    volumes:
+      - .:/home/ai-path
+      - /home/ai-path/node_modules
+    tty: true
