@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NodeComponent implements OnInit {
   @Input() nodeDim: string;
+  @Input() isStart: boolean;
   constructor() {}
 
   ngOnInit(): void {}

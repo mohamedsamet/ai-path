@@ -1,6 +1,7 @@
 <div class="grid-container row justify-content-start mx-0">
   <app-node
     [nodeDim]="nodeDim"
+    [isStart]="i + 1 === startNodeIndex"
     *ngFor="let node of gridArray; let i = index"
   ></app-node>
 </div>

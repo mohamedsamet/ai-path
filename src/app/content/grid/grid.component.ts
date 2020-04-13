@@ -10,6 +10,7 @@ import {
 } from 'src/app/constants/ai-grid-constants';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { GridService } from '../grid.service';
 
 @Component({
   selector: 'app-grid',
@@ -18,17 +19,31 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class GridComponent implements OnInit {
   public gridArray: number[];
-  public nodeDim = '9px';
+  public nodeDim: string;
   public nodeNumber: number;
   public gridX: number;
   public gridY: number;
-  constructor() {}
+  public startNodeIndex: number;
+  constructor(private gridService: GridService) {}
 
   ngOnInit(): void {
     this.setNodeNumber();
     this.calculNodeDim(window.innerWidth);
     this.listenToResize();
+    this.setStartNode();
     this.gridArray = Array(this.nodeNumber);
+  }
+
+  setStartNode() {
+    this.startNodeIndex = this.gridService.getRandomNumber(this.nodeNumber);
+  }
+
+  mapIndexToCoordinateX(index, lineWidth) {
+    return index - Math.floor(index / lineWidth) * lineWidth;
+  }
+
+  mapIndexToCoordinateY(index, lineWidth) {
+    return Math.floor(index / lineWidth);
   }
 
   setNodeNumber() {

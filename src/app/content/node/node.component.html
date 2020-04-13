@@ -1,1 +1,8 @@
-<div [ngStyle]="{ width: nodeDim, height: nodeDim }" class="node"></div>
+<div
+  [ngStyle]="{
+    width: nodeDim,
+    height: nodeDim,
+    'background-color': isStart ? 'green' : 'white'
+  }"
+  class="node"
+></div>
