@@ -3,7 +3,7 @@ services:
   web:
     container_name: ai-path-dev
     image: ai-path:latest
-    build: .
+    #build: .
     restart: always
     ports:
       - 8180:8180

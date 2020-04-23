@@ -1,10 +1,42 @@
 <div
-  (keyup)="move($event)"
-  class="grid-container row justify-content-start mx-0"
+    class="grid-container"
+    [class.is-hidden]="checkPathFind() || gameOver"
 >
-  <app-node
-    [nodeDim]="nodeDim"
-    [isStart]="i + 1 === startNodeIndex"
-    *ngFor="let node of gridArray; let i = index"
-  ></app-node>
+  <div class="row justify-content-start mx-0">
+    <app-node
+        [nodeDim]="nodeDim"
+        [isActive]="isActive(i + 1)"
+        [isEnd]="endNodeIndex === i + 1"
+        *ngFor="let node of gridArray; let i = index"
+    ></app-node>
+  </div>
+  <div class="row mx-0 d-flex justify-content-center">
+    <button (click)="changeMode(0)" [ngClass]="operationMode === 0 ? 'btn-dark' : 'btn-outline-dark'" class="m-xs-3 m-1 btn"> MANUAL</button>
+    <div class="dropdown">
+      <button [ngClass]="operationMode === 1 ? 'btn-dark' : 'btn-outline-dark'" class="m-1 m-xs-3 btn dropdown-toggle" type="button" id="dropdownAutoTimer"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> AUTO_TIMER
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownAutoTimer">
+        <a (click)="changeMode(1, 0)" class="dropdown-item" href="#">X_PRIO</a>
+        <a (click)="changeMode(1, 1)" class="dropdown-item" href="#">Y_PRIO</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button [ngClass]="operationMode === 2 ? 'btn-dark' : 'btn-outline-dark'" class="m-1 m-xs-3 btn dropdown-toggle" type="button" id="dropdownAuto"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> AUTO
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownAuto">
+        <a (click)="changeMode(2, 0)" class="dropdown-item" href="#">X_PRIO</a>
+        <a (click)="changeMode(2, 1)" class="dropdown-item" href="#">Y_PRIO</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-2 path-find-message" *ngIf="checkPathFind()">
+  <h6>YOU WON THE CHALLENGE IN {{activeNodesArray.length - 1}} MOVES</h6>
+  <button (click)="restartFinding()" class="btn btn-outline-dark">RESTART</button>
+</div>
+<div class="py-2 path-find-message is-error" *ngIf="gameOver">
+  <h6>GAME OVER</h6>
+  <button (click)="restartFinding()" class="btn btn-outline-dark">RESTART</button>
 </div>
