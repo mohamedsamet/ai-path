@@ -25,6 +25,8 @@ export class GridComponent implements OnInit {
   public startNodeIndex: number;
   public endNodeIndex: number;
   public activeNodesArray: number[] = [];
+  public neighboursNodesArray: number[] = [];
+  public tryNodesArray: number[] = [];
   public intervalSubscription: Subscription;
   public movementSubscription: Subscription;
   public gameOver: boolean;
@@ -224,5 +226,28 @@ export class GridComponent implements OnInit {
         this.startPathFind(event);
       }
     });
+  }
+
+  aStarModeAlgoLunch() {
+    this.operationMode = OperationMode.A_STAR;
+    let i = 0;
+    while (!this.activeNodesArray.includes(this.endNodeIndex) && i < 10) {
+      i++;
+      this.neighboursNodesArray = this.getNeighbours(this.startNodeIndex, this.gridX);
+      console.log(this.neighboursNodesArray);
+    }
+  }
+
+  getNeighbours(index, width) {
+    const neighbourArray = [index + 1, index - 1, index - width + 1, index - width, index - width - 1, index + width - 1, index + width + 1, index + width];
+    return neighbourArray.filter(elem => (elem > 0) && (elem <= this.nodeNumber) && !this.isXRightlimit(elem, index) && !this.isXLeftLimit(elem, index));
+  }
+
+  isXRightlimit(elem, index) {
+    return (index % this.gridX === 0 && (elem === index - this.gridX + 1 || elem === index + 1 || elem === index + this.gridX + 1));
+  }
+
+  isXLeftLimit(elem, index) {
+    return ((index - 1) % this.gridX === 0 && (elem === index - this.gridX - 1 || elem === index - 1 || elem === index + this.gridX - 1));
   }
 }

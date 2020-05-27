@@ -5,6 +5,7 @@
   <div class="row justify-content-start mx-0">
     <app-node
         [nodeDim]="nodeDim"
+        [isNeighbour]="neighboursNodesArray.includes(i + 1)"
         [isActive]="isActive(i + 1)"
         [isEnd]="endNodeIndex === i + 1"
         *ngFor="let node of gridArray; let i = index"
@@ -30,6 +31,7 @@
         <a (click)="changeMode(2, 1)" class="dropdown-item" href="#">Y_PRIO</a>
       </div>
     </div>
+    <button (click)="aStarModeAlgoLunch()" [ngClass]="operationMode === 3 ? 'btn-dark' : 'btn-outline-dark'" class="m-xs-3 m-1 btn"> A* Mode</button>
   </div>
 </div>
 <div class="py-2 path-find-message" *ngIf="checkPathFind()">

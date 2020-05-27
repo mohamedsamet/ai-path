@@ -9,6 +9,7 @@ export class NodeComponent implements OnInit {
   @Input() nodeDim: string;
   @Input() isActive: boolean;
   @Input() isEnd: boolean;
+  @Input() isNeighbour: boolean;
   constructor() {}
 
   ngOnInit(): void {}

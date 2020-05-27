@@ -13,7 +13,7 @@
     "docker-run": "npm run docker-down && npm run docker-up",
     "exec-cont": "docker exec -it ai-path-dev npm start",
     "go": "npm run docker-run && npm run exec-cont",
-    "goLight":  "docker exec -it ai-path-dev npm start"
+    "goLight": "docker exec -it ai-path-dev npm start"
   },
   "private": true,
   "dependencies": {
